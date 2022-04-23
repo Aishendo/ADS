@@ -1,0 +1,25 @@
+public class MyQueue<T extends Comparable<T>> {
+    private MyLinkedList<T> que;
+    public MyQueue(){que=new MyLinkedList<>();}
+
+    public boolean empty() {
+        if (que.size() == 0) {
+            return true;
+        } else return false;
+    }
+    public int size() {
+        return que.size();
+    }
+    public T peek() {
+        return que.get(0);
+    }
+    public T enqueue(T newItem) {
+        que.add(newItem);
+        return newItem;
+    }
+    public T dequeue() {
+        T removingItem = peek();
+        que.remove(0);
+        return removingItem;
+    }
+}
