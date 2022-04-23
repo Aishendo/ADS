@@ -1,0 +1,66 @@
+
+public class MyHeap<T extends Comparable<T>> {
+    private MyArrayList<T> my;
+    public MyHeap() {my = new MyArrayList<>();}
+
+    private Object[] arr;
+    private int root = 0;
+    private int capacity = 5;
+
+    public boolean empty() {
+        if (my.size() == 0) {
+            return true;
+        } else return false;
+    }
+
+    public int size() {
+        return my.size();
+    }
+
+    public void add(T newItem) {
+        my.add(newItem);
+        traverseUp(my.indexOf(newItem));
+    }
+    private T rightChildOf(int index) {
+        return my.get(2*index + 1);
+    }
+
+    private T leftChildOf(int index) {
+        return my.get(2*index);
+    }
+
+    private T parentOf(int index){
+        return my.get(index/2);
+    }
+    private void heapify() {
+        heapify(size() - 1, 0);
+    }
+    private void heapify(int size, int index)
+    {
+        int min   = index;
+        int left  = 2 * index;
+        int right = 2 * index + 1;
+
+        T minh = my.get(min);
+        T lefti = leftChildOf(index);
+        T righti = rightChildOf(index);
+        
+        if (0 > (size) && lefti.compareTo(minh) >= left)
+            min = left;
+        if (0 > (size) && righti.compareTo(minh) >= right)
+            min = right;
+        
+        if (min != index) {
+            swap(index, min);
+            heapify(size, min);
+            traverseUp(index);
+        }
+    }
+
+    private void swap(int index, int min) {
+        my.swap(index, min);
+    }
+
+    private void traverseUp(int indexOf) {
+    }
+}
